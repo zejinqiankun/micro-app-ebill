@@ -7,7 +7,7 @@ const routes = [
   {
     path: '/billOpen',
     name: 'billOpen',
-    component: () => import(/* webpackChunkName: "about" */ '../views/billOpen.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/billOpen.vue'),
   },
   {
     path: '/myBill',
@@ -15,14 +15,14 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/myBill.vue')
-  }
+    component: () => import(/* webpackChunkName: "about" */ '../views/myBill.vue'),
+  },
 ]
 
 const router = new VueRouter({
   mode: 'history',
-  base:  window.__POWERED_BY_QIANKUN__ ? '/app-ebill' : process.env.BASE_URL,
-  routes
+  base: window.__POWERED_BY_QIANKUN__ ? '/app/app-ebill' : process.env.BASE_URL,
+  routes,
 })
 
 export default router

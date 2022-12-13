@@ -1,8 +1,3 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-
-Vue.use(VueRouter)
-
 const routes = [
   {
     path: '/billOpen',
@@ -17,12 +12,13 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/myBill.vue'),
   },
+  {
+    path: '/*',
+    name: '404',
+    component: () => import('../views/errorPage/404.vue'),
+    meta: {
+      notRequireAuth: true
+    }
+  }
 ]
-
-const router = new VueRouter({
-  mode: 'history',
-  base: window.__POWERED_BY_QIANKUN__ ? '/app/app-ebill' : process.env.BASE_URL,
-  routes,
-})
-
-export default router
+export default routes

@@ -1,14 +1,22 @@
 import './public-path'
 import Vue from 'vue'
 import App from './App.vue'
-import router from './router'
+import VueRouter from 'vue-router'
+import routes from './router'
 import store from './store'
 Vue.config.productionTip = false
+Vue.use(VueRouter)
 let instance = null
+let router = null;
 
 //1. 将注册方法用函数包裹，供后续主应用与独立运行调用
 function render(props = {}) {
-  console.log('render ebill')
+  console.log('render ebill',props)
+  router = new VueRouter({
+    base: window.__POWERED_BY_QIANKUN__ ? props.routerBase : process.env.BASE_URL,
+    mode: 'history',
+    routes,
+  });
   const { container, globeData } = props
   // 填充 globeData 到子应用store里
   store.state.globeData = globeData
@@ -51,6 +59,7 @@ export async function unmount(props) {
   instance.$destroy()
   instance.$el.innerHTML = ''
   instance = null
+  router = null;
 }
 /**
  * 可选生命周期钩子，仅使用 loadMicroApp 方式加载微应用时生效
